@@ -125,13 +125,18 @@ export const App = () => {
       >
         <input
           type="text"
+          disabled={filter === "checked" || filter === "removed"}
           value={text}
           onChange={(e) => handleOnChange(e.target.value)}
         />
-        <input type="submit" value="追加" />
+        <input
+          type="submit"
+          value="追加"
+          disabled={filter === "checked" || filter === "removed"}
+        />
       </form>
       <ul>
-        {todos.map((todo) => {
+        {filteredTodos.map((todo) => {
           return (
             <li key={todo.id}>
               <input
