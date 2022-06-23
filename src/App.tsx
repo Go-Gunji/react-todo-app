@@ -34,6 +34,23 @@ export const App = () => {
     setText("");
   };
 
+  const handleOnEdit = (id: number, value: string) => {
+    /**
+     * todoリストをディープコピーする為に、todosからmapでtodoをコピーし、
+     * todo内のプロパティをスプレッド構文でコピーする
+     */
+    const deevCopy = todos.map((todo) => ({ ...todo }));
+
+    const newTodos = deevCopy.map((todo) => {
+      if (todo.id === id) {
+        todo.value = value;
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
   return (
     <div>
       <form
@@ -47,7 +64,15 @@ export const App = () => {
       </form>
       <ul>
         {todos.map((todo) => {
-          return <li key={todo.id}> {todo.value}</li>;
+          return (
+            <li key={todo.id}>
+              <input
+                type="text"
+                value={todo.value}
+                onChange={(e) => handleOnEdit(todo.id, e.target.value)}
+              />
+            </li>
+          );
         })}
       </ul>
     </div>
