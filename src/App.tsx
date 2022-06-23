@@ -15,8 +15,8 @@ export const App = () => {
    */
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+  const handleOnChange = (value: string) => {
+    setText(value);
   };
 
   const handleOnSubmit = () => {
@@ -59,7 +59,11 @@ export const App = () => {
           handleOnSubmit();
         }}
       >
-        <input type="text" value={text} onChange={(e) => handleOnChange(e)} />
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => handleOnChange(e.target.value)}
+        />
         <input type="submit" value="追加" />
       </form>
       <ul>
