@@ -27,6 +27,7 @@ export const App = () => {
     const newTodo: Todo = {
       value: text,
       id: new Date().getTime(),
+      checked: false,
     };
 
     setTodos([newTodo, ...todos]);
@@ -44,6 +45,19 @@ export const App = () => {
     const newTodos = deevCopy.map((todo) => {
       if (todo.id === id) {
         todo.value = value;
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
+  const handleOnCheck = (id: number, checked: boolean) => {
+    const deevCopy = todos.map((todo) => ({ ...todo }));
+
+    const newTodos = deevCopy.map((todo) => {
+      if (todo.id === id) {
+        todo.checked = !checked;
       }
       return todo;
     });
@@ -71,6 +85,12 @@ export const App = () => {
           return (
             <li key={todo.id}>
               <input
+                type="checkbox"
+                checked={todo.checked}
+                onChange={() => {
+                  handleOnCheck(todo.id, todo.checked);
+                }}
+              />
                 type="text"
                 value={todo.value}
                 onChange={(e) => handleOnEdit(todo.id, e.target.value)}
