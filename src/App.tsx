@@ -53,9 +53,9 @@ export const App = () => {
      * todoリストをディープコピーする為に、todosからmapでtodoをコピーし、
      * todo内のプロパティをスプレッド構文でコピーする
      */
-    const deevCopy = todos.map((todo) => ({ ...todo }));
+    const deepCopy = todos.map((todo) => ({ ...todo }));
 
-    const newTodos = deevCopy.map((todo) => {
+    const newTodos = deepCopy.map((todo) => {
       if (todo.id === id) {
         todo.value = value;
       }
@@ -66,9 +66,9 @@ export const App = () => {
   };
 
   const handleOnCheck = (id: number, checked: boolean) => {
-    const deevCopy = todos.map((todo) => ({ ...todo }));
+    const deepCopy = todos.map((todo) => ({ ...todo }));
 
-    const newTodos = deevCopy.map((todo) => {
+    const newTodos = deepCopy.map((todo) => {
       if (todo.id === id) {
         todo.checked = !checked;
       }
@@ -79,15 +79,20 @@ export const App = () => {
   };
 
   const handleOnRemove = (id: number, removed: boolean) => {
-    const deevCopy = todos.map((todo) => ({ ...todo }));
+    const deepCopy = todos.map((todo) => ({ ...todo }));
 
-    const newTodos = deevCopy.map((todo) => {
+    const newTodos = deepCopy.map((todo) => {
       if (todo.id === id) {
         todo.removed = !removed;
       }
       return todo;
     });
 
+    setTodos(newTodos);
+  };
+
+  const handleOnEmpty = () => {
+    const newTodos = todos.filter((todo) => !todo.removed);
     setTodos(newTodos);
   };
 
@@ -117,24 +122,25 @@ export const App = () => {
         <option value="unchecked">現在のタスク</option>
         <option value="removed">ゴミ箱</option>
       </select>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleOnSubmit();
-        }}
-      >
-        <input
-          type="text"
-          disabled={filter === "checked" || filter === "removed"}
-          value={text}
-          onChange={(e) => handleOnChange(e.target.value)}
-        />
-        <input
-          type="submit"
-          value="追加"
-          disabled={filter === "checked" || filter === "removed"}
-        />
-      </form>
+      {filter === "removed" ? (
+        <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
+      ) : (
+        filter !== "checked" && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleOnSubmit();
+            }}
+          >
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => handleOnChange(e.target.value)}
+            />
+            <input type="submit" value="追加" />
+          </form>
+        )
+      )}
       <ul>
         {filteredTodos.map((todo) => {
           return (
