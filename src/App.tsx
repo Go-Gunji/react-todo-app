@@ -133,11 +133,16 @@ export const App = () => {
             }}
           >
             <input
+              className="shadow appearance-none border rounded"
               type="text"
               value={text}
               onChange={(e) => handleOnChange(e.target.value)}
             />
-            <input type="submit" value="追加" />
+            <input
+              className="bg-blue-500 text-white py-2 px-3 rounded"
+              type="submit"
+              value="追加"
+            />
           </form>
         )
       )}
