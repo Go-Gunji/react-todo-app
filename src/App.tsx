@@ -158,6 +158,7 @@ export const App = () => {
             <li key={todo.id}>
               <input
                 type="checkbox"
+                className="mx-3"
                 disabled={todo.removed}
                 checked={todo.checked}
                 onChange={() => {
@@ -166,6 +167,7 @@ export const App = () => {
               />
               <input
                 type="text"
+                className="shadow appearance-none border rounded mx-1"
                 disabled={todo.checked || todo.removed}
                 value={todo.value}
                 onChange={(e) => handleOnEdit(todo.id, e.target.value)}
