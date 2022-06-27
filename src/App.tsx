@@ -124,7 +124,12 @@ export const App = () => {
         <option value="removed">ゴミ箱</option>
       </select>
       {filter === "removed" ? (
-        <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
+        <button
+          className="bg-gray-500 text-white py-2 px-3 rounded m-2"
+          onClick={() => handleOnEmpty()}
+        >
+          ゴミ箱を空にする
+        </button>
       ) : (
         filter !== "checked" && (
           <form
@@ -166,6 +171,7 @@ export const App = () => {
                 onChange={(e) => handleOnEdit(todo.id, e.target.value)}
               />
               <button
+                className="bg-red-500 text-white py-2 px-3 rounded m-2"
                 onClick={() => {
                   handleOnRemove(todo.id, todo.removed);
                 }}
