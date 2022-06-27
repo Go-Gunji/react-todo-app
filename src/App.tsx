@@ -114,6 +114,7 @@ export const App = () => {
   return (
     <div>
       <select
+        className="p-1 rounded border m-3"
         defaultValue="all"
         onChange={(e) => handleOnChangeFilter(e.target.value as Filter)}
       >
