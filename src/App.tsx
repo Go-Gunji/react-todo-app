@@ -114,6 +114,7 @@ export const App = () => {
   return (
     <div>
       <select
+        className="p-1 rounded border m-3"
         defaultValue="all"
         onChange={(e) => handleOnChangeFilter(e.target.value as Filter)}
       >
@@ -123,7 +124,12 @@ export const App = () => {
         <option value="removed">ゴミ箱</option>
       </select>
       {filter === "removed" ? (
-        <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
+        <button
+          className="bg-gray-500 text-white py-2 px-3 rounded m-2"
+          onClick={() => handleOnEmpty()}
+        >
+          ゴミ箱を空にする
+        </button>
       ) : (
         filter !== "checked" && (
           <form
@@ -133,13 +139,13 @@ export const App = () => {
             }}
           >
             <input
-              className="shadow appearance-none border rounded"
+              className="shadow appearance-none border rounded mx-3"
               type="text"
               value={text}
               onChange={(e) => handleOnChange(e.target.value)}
             />
             <input
-              className="bg-blue-500 text-white py-2 px-3 rounded"
+              className="bg-blue-500 text-white py-2 px-3 rounded mx-2"
               type="submit"
               value="追加"
             />
@@ -152,6 +158,7 @@ export const App = () => {
             <li key={todo.id}>
               <input
                 type="checkbox"
+                className="mx-3"
                 disabled={todo.removed}
                 checked={todo.checked}
                 onChange={() => {
@@ -160,11 +167,13 @@ export const App = () => {
               />
               <input
                 type="text"
+                className="shadow appearance-none border rounded mx-1"
                 disabled={todo.checked || todo.removed}
                 value={todo.value}
                 onChange={(e) => handleOnEdit(todo.id, e.target.value)}
               />
               <button
+                className="bg-red-500 text-white py-2 px-3 rounded m-2"
                 onClick={() => {
                   handleOnRemove(todo.id, todo.removed);
                 }}
