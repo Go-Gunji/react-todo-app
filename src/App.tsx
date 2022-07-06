@@ -1,13 +1,6 @@
 import { useState } from "react";
-
-type Todo = {
-  value: string;
-  id: number;
-  checked: boolean;
-  removed: boolean;
-};
-
-type Filter = "all" | "checked" | "unchecked" | "removed";
+import { Select } from "./conponents/select";
+import { Todo, Filter } from "./type";
 
 export const App = () => {
   /**
@@ -113,7 +106,8 @@ export const App = () => {
 
   return (
     <div>
-      <select
+      <Select handleOnChangeFilter={handleOnChangeFilter}></Select>
+      {/* <select
         className="p-1 rounded border m-3"
         defaultValue="all"
         onChange={(e) => handleOnChangeFilter(e.target.value as Filter)}
@@ -122,7 +116,7 @@ export const App = () => {
         <option value="checked">完了したタスク</option>
         <option value="unchecked">現在のタスク</option>
         <option value="removed">ゴミ箱</option>
-      </select>
+      </select> */}
       {filter === "removed" ? (
         <button
           className="bg-gray-500 text-white py-2 px-3 rounded m-2"
