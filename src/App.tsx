@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Power from "./conponents/power";
 import { Select } from "./conponents/select";
 import { Todo, Filter } from "./type";
 
@@ -168,6 +169,7 @@ export const App = () => {
           );
         })}
       </ul>
+      <Power name="電源"></Power>
     </div>
   );
 };
