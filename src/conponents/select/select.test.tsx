@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { App } from "./App";
+import { Select } from ".";
 
 test("リストのフィルター表示", () => {
-  render(<App />);
+  render(<Select handleOnChangeFilter={() => {}} />);
   const selectElement = screen.getByText(/すべてのタスク/i);
   expect(selectElement).toBeInTheDocument();
 });
