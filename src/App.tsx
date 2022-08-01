@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Power from "./conponents/power";
-import { Select } from "./conponents/select";
+import { Select } from "./conponents/Select";
 import { Todo, Filter } from "./type";
 
 export const App = () => {
