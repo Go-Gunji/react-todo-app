@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Power from "./conponents/power";
 import { Select } from "./conponents/Select";
+import { AddForm } from "./conponents/AddForm";
 import { Todo, Filter } from "./type";
 
 export const App = () => {
@@ -117,24 +118,11 @@ export const App = () => {
         </button>
       ) : (
         filter !== "checked" && (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleOnSubmit();
-            }}
-          >
-            <input
-              className="shadow appearance-none border rounded mx-3"
-              type="text"
-              value={text}
-              onChange={(e) => handleOnChange(e.target.value)}
-            />
-            <input
-              className="bg-blue-500 text-white py-2 px-3 rounded mx-2"
-              type="submit"
-              value="追加"
-            />
-          </form>
+          <AddForm
+            text={text}
+            handleOnSubmit={handleOnSubmit}
+            handleOnChange={handleOnChange}
+          />
         )
       )}
       <ul>
