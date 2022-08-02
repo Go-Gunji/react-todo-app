@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Power from "./conponents/power";
-import { Select } from "./conponents/select";
+import { Select } from "./conponents/Select";
+import { AddForm } from "./conponents/AddForm";
+import { TodoList } from "./conponents/TodoList";
 import { Todo, Filter } from "./type";
 
 export const App = () => {
@@ -90,21 +92,6 @@ export const App = () => {
     setTodos(newTodos);
   };
 
-  const filteredTodos = todos.filter((todo) => {
-    switch (filter) {
-      case "all":
-        return !todo.removed;
-      case "checked":
-        return todo.checked && !todo.removed;
-      case "unchecked":
-        return !todo.checked && !todo.removed;
-      case "removed":
-        return todo.removed;
-      default:
-        return todo;
-    }
-  });
-
   return (
     <div>
       <Select handleOnChangeFilter={handleOnChangeFilter}></Select>
@@ -117,58 +104,20 @@ export const App = () => {
         </button>
       ) : (
         filter !== "checked" && (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleOnSubmit();
-            }}
-          >
-            <input
-              className="shadow appearance-none border rounded mx-3"
-              type="text"
-              value={text}
-              onChange={(e) => handleOnChange(e.target.value)}
-            />
-            <input
-              className="bg-blue-500 text-white py-2 px-3 rounded mx-2"
-              type="submit"
-              value="追加"
-            />
-          </form>
+          <AddForm
+            text={text}
+            handleOnSubmit={handleOnSubmit}
+            handleOnChange={handleOnChange}
+          />
         )
       )}
-      <ul>
-        {filteredTodos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <input
-                type="checkbox"
-                className="mx-3"
-                disabled={todo.removed}
-                checked={todo.checked}
-                onChange={() => {
-                  handleOnCheck(todo.id, todo.checked);
-                }}
-              />
-              <input
-                type="text"
-                className="shadow appearance-none border rounded mx-1"
-                disabled={todo.checked || todo.removed}
-                value={todo.value}
-                onChange={(e) => handleOnEdit(todo.id, e.target.value)}
-              />
-              <button
-                className="bg-red-500 text-white py-2 px-3 rounded m-2"
-                onClick={() => {
-                  handleOnRemove(todo.id, todo.removed);
-                }}
-              >
-                {todo.removed ? "復元" : "削除"}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <TodoList
+        todos={todos}
+        filter={filter}
+        handleOnCheck={handleOnCheck}
+        handleOnEdit={handleOnEdit}
+        handleOnRemove={handleOnRemove}
+      />
       <Power name="電源"></Power>
     </div>
   );
